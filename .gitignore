@@ -23,6 +23,6 @@
 hs_err_pid*
 
 # IDE files
-ascii-art.iml
-.idea/
-.vscode/
+/.idea/
+/.vscode/
+/ascii-art.iml
