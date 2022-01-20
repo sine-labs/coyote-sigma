@@ -25,4 +25,4 @@ hs_err_pid*
 # IDE files
 /.idea/
 /.vscode/
-/ascii-art.iml
+/coyote-sigma.iml

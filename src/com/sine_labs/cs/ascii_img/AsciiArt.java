@@ -6,15 +6,12 @@ public class AsciiArt {
     // https://www.geeksforgeeks.org/converting-image-ascii-image-python/
     private static final String G_SCALE = (
             "$@B%8&WM#*oahkbdpqwmZO0QLCJUYX"
-            + "zcvunxrjft/\\|()1{}[]?-_+~i!l"
-            + "I;:,\\\"^`\". "
+                    + "zcvunxrjft/\\|()1{}[]?-_+~i!l"
+                    + "I;:,\\\"^`\". "
     );
     private char[][] ascii;
 
     public AsciiArt(Image img, int scale) {
-        int pHeight = img.getHeight() + scale - (img.getHeight() % scale);
-        int pWidth = img.getWidth() + scale - (img.getWidth() % scale);
-
         double avg = 0;
         int[][] gScale = new int[img.getHeight()][img.getWidth()];
         for (int r = 0; r < gScale.length; r++) {
@@ -23,7 +20,6 @@ public class AsciiArt {
                 avg += gScale[r][c];
             }
         }
-        avg /= gScale.length * gScale[0].length;
 
         // clamp it between 0 & 100
         int newHeight = img.getHeight() / scale;
@@ -38,12 +34,14 @@ public class AsciiArt {
                     }
                 }
                 int brightness = total / (scale * scale);
-                ascii[r][c] = G_SCALE.charAt((int) (avg * G_SCALE.length() / 255));
+                ascii[r][c] = G_SCALE.charAt(brightness * G_SCALE.length() / 256);
             }
         }
     }
 
-    public char getPixel(int r, int c) { return ascii[r][c]; }
+    public char getPixel(int r, int c) {
+        return ascii[r][c];
+    }
 
     public String toString() {
         StringBuilder ret = new StringBuilder();

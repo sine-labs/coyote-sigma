@@ -35,6 +35,10 @@ public class Image {
 
     public void setPixel(int r, int c, Color col) { img[r][c] = col; }
 
+    public void setPixel(int r, int c, int darkness) {
+        img[r][c] = new Color(darkness, darkness, darkness);
+    }
+
     public static int gScale(Color col) {
         return (col.getRed() + col.getGreen() + col.getBlue()) / 3;
     }
