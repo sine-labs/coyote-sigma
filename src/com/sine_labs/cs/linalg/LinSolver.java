@@ -1,4 +1,4 @@
-package com.sine_labs.cs.coyote_sigma;
+package com.sine_labs.cs.linalg;
 
 import java.util.Scanner;
 
