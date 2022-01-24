@@ -1,4 +1,4 @@
-package com.sine_labs.cs.coyote_sigma;
+package com.sine_labs.cs.linalg;
 
 import java.util.Scanner;
 
@@ -43,7 +43,7 @@ public class LinSolver {
                 printArray();
                 mult(i, 1 / m[i][v]);
                 for (j = 0; j < m.length; j++) {
-                    if (m[j][v] != 0) {
+                    if (m[j][v] != 0 && i != j) {
                         add(j, i, -m[j][v]);
                         System.out.print(num[j] + " + " + (-m[j][v]) + " * " + num[i] + " --> " + nextNum + ": ");
                         print(j);
@@ -73,9 +73,11 @@ public class LinSolver {
         return 0.0;
     }
 
-    // TODO: switch two equations
     public void switchRow(int a, int b) {
-
+        if (a == b) return;
+        double[] temp = m[a];
+        m[a] = m[b];
+        m[b] = temp;
     }
 
     // TODO: row operators

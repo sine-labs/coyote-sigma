@@ -1,4 +1,4 @@
-package com.sine_labs.cs;
+package com.sine_labs.cs.linalg;
 
 import com.sine_labs.cs.coyote_sigma.LinSolver;
 
