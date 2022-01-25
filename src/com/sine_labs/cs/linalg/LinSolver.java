@@ -4,20 +4,23 @@ import java.util.Scanner;
 
 public class LinSolver {
 
-    private double[][] m;  // the matrix
+    private double[][] in, m;  // the matrix (input is original, for verification purposes)
     private boolean[] free;
-    private int[] num;  // equation number?
+    private int[] num, lead;  // equation number, which column has the leading 1
     private String[] var;  // "name" of each variable
 
     // TODO: constructor
-    public LinSolver(double[][] m) {
+    public LinSolver(double[][] m, String[] var) {
         this.m = m;
+        in = m.clone();
+        this.var = var;
         free = new boolean[m.length];
         num = new int[m.length];
+        lead = new int[m.length];
         for (int i = 0; i < m.length; i++) {
             num[i] = i + 1;
+            lead[i] = m.length;
         }
-
     }
 
     // TODO: input
@@ -28,49 +31,70 @@ public class LinSolver {
     }
 
     public boolean solve() {
+        printArray();
         int nextNum = num.length + 1;
-        int v = 0;
+        int v = 0;  // the variable we're trying to create a pivot for
         for (int i = 0; i < m.length; i++) {
+            // j: scan for a row with non-zero v coef
             int j = i;
             while (j < m.length && m[j][v] == 0) j++;
-            if (j == m.length) {
+            if (j == m.length) {  // if all zeros, v is free; increment v (at end of if else), same row
                 free[v] = true;
                 i--;
             }
-            else {
-                switchRow(i, j);
-                System.out.println("switch " + i + " " + j);
-                printArray();
-                mult(i, 1 / m[i][v]);
+            else {  // found nonzero v coef!
+                switchRow(i, j);  // switch the rows to maintain echelon form
+                lead[i] = v;  // variable v is the pivot for this row
+                System.out.println("switch " + i + " " + j + " " + v);
+                mult(i, 1 / m[i][v]);  // make sure the leading entry is 1
                 for (j = 0; j < m.length; j++) {
                     if (m[j][v] != 0 && i != j) {
-                        add(j, i, -m[j][v]);
-                        System.out.print(num[j] + " + " + (-m[j][v]) + " * " + num[i] + " --> " + nextNum + ": ");
-                        print(j);
+                        System.out.print(num[j] + " + " + (-m[j][v]) + " * " + num[i] + " --> ");
+                        add(j, i, -m[j][v]);  // remove v from all other equations (make coef 0)
                         num[j] = nextNum++;
+                        boolean consistent = print(j);
+                        if (!consistent) return false;
                     }
                 }
+                printArray();  // for debugging
             }
             v++;
         }
-        return true;
+        return true;  // has proper solution!
     }
 
-    // TODO: print out an equation
-    public void print(int r) {
-        System.out.println();
+    public boolean print(int r) {
+        System.out.print(num[r] + ": ");
+        boolean allZero = true;
+        for (int i = 0; i < m.length; i++) {
+            m[r][i] = round(m[r][i]);
+            if (m[r][i] != 0) {
+                if (!allZero) System.out.print(" + ");
+                allZero = false;
+                System.out.print(m[r][i] + var[i]);
+            }
+        }
+        m[r][m.length] = round(m[r][m.length]);
+        if (allZero) {
+            System.out.println("0 = " + m[r][m.length]);
+            System.out.println(" This system of equations cannot be solved");
+            return false;
+        }
+        System.out.println(" = " + m[r][m.length]);
+        return true;
     }
     public void printArray() {
         for (double[] r : m) {
             for (double i : r) {
-                System.out.print(i + " ");
+                System.out.print(round(i) + " ");
             }
             System.out.println();
         }
     }
     // TODO: rounding - to make things prettier
-    public double round() {
-        return 0.0;
+    public double round(double d) {
+        double r = (int)(d * 100 + 0.5);
+        return r / 100;
     }
 
     public void switchRow(int a, int b) {
@@ -80,12 +104,37 @@ public class LinSolver {
         m[b] = temp;
     }
 
-    // TODO: row operators
     public void mult(int r, double factor) {
-
+        for (int i = 0; i < m[r].length; i++) m[r][i] = round(m[r][i] * factor);
     }
     // row a += factor * row b
     public void add(int a, int b, double factor) {
+        for (int i = 0; i < m[a].length; i++)
+            m[a][i] += round(m[b][i] * factor);
+    }
 
+    public void verify() {
+        double[] val = new double[var.length + 1];
+        for (int i = 0; i < m.length; i++) {
+            if (free[i]) val[i] = 10;  // assign all free vars to random value
+        }
+        // find values for all other variables
+        for (int r = m.length - 1; r >= 0; r--) {
+            for (int c = lead[r] + 1; c < m.length; c++) {
+                val[lead[r]] -= m[r][c] * val[c];
+            }
+            val[lead[r]] += m[r][m.length];
+        }
+        // plug and chug into original equations
+        for (int r = 0; r < in.length; r++) {
+            double sum = 0;
+            for (int c = 0; c < m.length; c++) {
+                sum += val[c] * in[r][c];
+            }
+            if (round(sum - in[r][m.length]) != 0) {
+                System.out.println("I'm sorry, something went wrong with equation " + (r + 1) + ".\n" +
+                        "check " + sum + " vs " + in[r][m.length]);
+            }
+        }
     }
 }
