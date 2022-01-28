@@ -35,8 +35,8 @@ public class AsciiMain {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
         Image img = new Image(arr.length, arr[0].length);
-        for (int i = 0; i < 28; i++) {
-            for (int j = 0; j < 28; j++) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
                 img.setPixel(i, j, new Color(arr[i][j], arr[i][j], arr[i][j]));
             }
         }
