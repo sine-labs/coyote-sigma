@@ -1,9 +1,6 @@
 package com.sine_labs.cs.linalg;
 
-import java.util.Scanner;
-
 public class LinSolver {
-
     private double[][] in, m;  // the matrix (input is original, for verification purposes)
     private boolean[] free;
     private int[] num, lead;  // equation number, which column has the leading 1
@@ -23,13 +20,6 @@ public class LinSolver {
         }
     }
 
-    // TODO: input
-    public void input() {
-        Scanner sc = new Scanner(System.in);
-
-        sc.close();
-    }
-
     public boolean solve() {
         printArray();
         int nextNum = num.length + 1;
@@ -41,8 +31,7 @@ public class LinSolver {
             if (j == m.length) {  // if all zeros, v is free; increment v (at end of if else), same row
                 free[v] = true;
                 i--;
-            }
-            else {  // found nonzero v coef!
+            } else {  // found nonzero v coef!
                 switchRow(i, j);  // switch the rows to maintain echelon form
                 lead[i] = v;  // variable v is the pivot for this row
                 System.out.print(round(1 / m[i][v]) + " * " + num[i] + " --> ");
@@ -83,6 +72,7 @@ public class LinSolver {
         System.out.println(" = " + round(m[r][m.length]));
         return true;
     }
+
     public void printArray() {
         for (int i = 0; i < m.length; i++) {
             print(i);
@@ -114,6 +104,7 @@ public class LinSolver {
     public void mult(int r, double factor) {
         for (int i = 0; i < m[r].length; i++) m[r][i] = m[r][i] * factor;
     }
+
     // row a += factor * row b
     public void add(int a, int b, double factor) {
         for (int i = 0; i < m[a].length; i++)
