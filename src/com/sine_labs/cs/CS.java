@@ -19,17 +19,22 @@ public class CS {
         String[] options = new String[] {"lin", "ascii", "poly", "exit"};
         while (true) {
             System.out.println("What would you like to do?");
-            String res = getInput(options);
-            if (res.equals("lin")) {
+            String option = getInput(options);
+            if (option.equals("lin")) {
                 double[][] mat = readEq();
                 String[] vars = new String[mat.length];
                 for (int i = 0; i < vars.length; i++) {
                     vars[i] = "x" + i;
                 }
                 LinSolver ls = new LinSolver(mat, vars);
-                ls.solve();
+                boolean res = ls.solve();
+                if (!res) {
+                    System.out.println("No valid solution found.");
+                } else {
+
+                }
                 ls.verify();
-            } else if (res.equals("ascii")) {
+            } else if (option.equals("ascii")) {
                 System.out.print("Image file:");
                 String file = sc.next();
                 System.out.print("Scale: ");
@@ -37,9 +42,9 @@ public class CS {
                 Image img = new Image(new File(file));
                 AsciiArt art = new AsciiArt(img, scale);
                 System.out.println(art);
-            } else if (res.equals("poly")) {
+            } else if (option.equals("poly")) {
                 int[] coeff = readPoly();
-            } else if (res.equals("exit")) {
+            } else if (option.equals("exit")) {
                 System.out.println(Colors.conv("Goodbye.", Colors.YELLOW));
                 break;
             }
