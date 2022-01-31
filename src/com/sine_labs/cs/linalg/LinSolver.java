@@ -89,6 +89,16 @@ public class LinSolver {
         }
     }
 
+    public double[] getCol(int c) {
+        double[] col = new double[m.length];
+        for (int i = 0; i < m.length; i++) col[i] = m[i][c];
+        return col;
+    }
+
+    public double[] getCol() {
+        return getCol(m[0].length - 1);
+    }
+
     public double round(double d) {
         double r = (int)(d * 100 + 0.5);
         return r / 100;
