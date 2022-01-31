@@ -2,6 +2,7 @@ package com.sine_labs.cs;
 
 import com.sine_labs.cs.ascii_img.AsciiArt;
 import com.sine_labs.cs.ascii_img.Image;
+import com.sine_labs.cs.linalg.LinSolver;
 import com.sine_labs.cs.util.Colors;
 
 import java.io.File;
@@ -21,6 +22,13 @@ public class CS {
             String res = getInput(options);
             if (res.equals("lin")) {
                 double[][] mat = readEq();
+                String[] vars = new String[mat.length];
+                for (int i = 0; i < vars.length; i++) {
+                    vars[i] = "x" + i;
+                }
+                LinSolver ls = new LinSolver(mat, vars);
+                ls.solve();
+                ls.verify();
             } else if (res.equals("ascii")) {
                 System.out.print("Image file:");
                 String file = sc.next();
