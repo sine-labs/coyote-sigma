@@ -31,9 +31,11 @@ public class CS {
                 if (!res) {
                     System.out.println("No valid solution found.");
                 } else {
-
+                    double[] ans = ls.getCol(vars.length);
+                    for (int i = 0; i < ans.length; i++) {
+                        System.out.println(vars[i] + " = " + ans[i]);
+                    }
                 }
-                ls.verify();
             } else if (option.equals("ascii")) {
                 System.out.print("Image file:");
                 String file = sc.next();

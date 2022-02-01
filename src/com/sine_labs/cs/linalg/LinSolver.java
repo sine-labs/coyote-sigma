@@ -1,10 +1,11 @@
 package com.sine_labs.cs.linalg;
 
 public class LinSolver {
-    private double[][] in, m;  // the matrix (input is original, for verification purposes)
-    private boolean[] free;
-    private int[] num, lead;  // equation number, which column has the leading 1
-    private String[] var;  // "name" of each variable
+    // the matrix (in is original mat for verification purposes)
+    private final double[][] in, m;
+    private final boolean[] free;
+    private final int[] num, lead;  // equation number, which column has the leading 1
+    private final String[] var;  // "name" of each variable
 
     // TODO: constructor
     public LinSolver(double[][] m, String[] var) {
