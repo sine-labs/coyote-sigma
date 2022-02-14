@@ -167,7 +167,7 @@ public class Element
      * 7s, 7p, 7d, 7f, 7g, 7h, 7i     88
      * 8s, 8p, 8d, 8f, 8g, 8h, 8i, 8j 120
      **/
-    private static Orbital[] {
+    private static Orbital[] AufbausOrbitals = new Orbital[] {
         new Orbital(1, Orbital.SubShell.s),
         new Orbital(2, Orbital.SubShell.s),
         new Orbital(2, Orbital.SubShell.p),
