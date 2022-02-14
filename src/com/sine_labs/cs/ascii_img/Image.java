@@ -22,8 +22,10 @@ public class Image {
         img = new Color[read.getHeight()][read.getWidth()];
         for (int r = 0; r < img.length; r++) {
             for (int c = 0; c < img[r].length; c++) {
-                img[r][c] = new Color(read.getRGB(r, c));
+                // the image indices are so stupid omg
+                img[r][c] = new Color(read.getRGB(c, r));
             }
+            System.out.println();
         }
     }
 

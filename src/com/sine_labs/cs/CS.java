@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CS {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         System.out.println(Colors.conv("COYOTE SIGMA", Colors.CYAN));
@@ -37,7 +37,7 @@ public class CS {
                     }
                 }
             } else if (option.equals("ascii")) {
-                System.out.print("Image file:");
+                System.out.print("Image file: ");
                 String file = sc.next();
                 System.out.print("Scale: ");
                 int scale = sc.nextInt();
