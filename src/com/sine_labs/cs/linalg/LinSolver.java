@@ -7,7 +7,6 @@ public class LinSolver {
     private final int[] num, lead;  // equation number, which column has the leading 1
     private final String[] var;  // "name" of each variable
 
-    // TODO: constructor
     public LinSolver(double[][] m, String[] var) {
         this.m = m;
         in = m.clone();
