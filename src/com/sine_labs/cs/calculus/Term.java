@@ -3,7 +3,6 @@ package com.sine_labs.cs.calculus;
 import java.util.List;
 
 public class Term extends Expression {
-
     private double coef, pow;
 
     public Term(Input in) {

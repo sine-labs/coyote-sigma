@@ -6,8 +6,12 @@ public class Input {  // container function for strings to make them mutable :\
 
     public Input(String s) {
         this.s = s;
+        removeSpaces();
     }
 
+    public void removeSpaces() {
+        s = s.replace(" ", "");
+    }
     public void pop(int i) {
         if (s.length() < i) System.out.println("DEAD_BEEF");
         else s = s.substring(i);
