@@ -157,6 +157,7 @@ public class MutlidegreePolynomial {
 			else {
 				System.out.print("+ ");
 				if (polynomial.get(i) != 1) printNum(polynomial.get(i));
+				else if (i == 0) System.out.print("1");
 			}
 			if (i == 1) System.out.print("x");
 			else if (i != 0) System.out.print("x^" + i);
