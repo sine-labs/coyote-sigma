@@ -3,6 +3,7 @@ package com.sine_labs.cs;
 import com.sine_labs.cs.ascii_img.AsciiArt;
 import com.sine_labs.cs.ascii_img.Image;
 import com.sine_labs.cs.linalg.LinSolver;
+import com.sine_labs.cs.poly.PolySolver;
 import com.sine_labs.cs.util.Colors;
 
 import java.io.File;
@@ -45,7 +46,16 @@ public class CS {
                 AsciiArt art = new AsciiArt(img, scale);
                 System.out.println(art);
             } else if (option.equals("poly")) {
-                int[] coeff = readPoly();
+                int[] coeffs = readPoly();
+                double[] sols = new PolySolver(coeffs).sols();
+                if (sols.length == 0) {
+                    System.out.println("No Solutions :(");
+                } else {
+                    System.out.println("Solutions");
+                    for (double s : sols) {
+                        System.out.println(s);
+                    }
+                }
             } else if (option.equals("exit")) {
                 System.out.println(Colors.conv("Goodbye.", Colors.YELLOW));
                 break;
@@ -84,7 +94,7 @@ public class CS {
         }
         System.out.println("c_0");
 
-        System.out.println("Input the coefficients (must be integers):");
+        System.out.println("Input the numbers from the leading coefficient to the constant term:");
         int[] coeff = new int[deg + 1];
         for (int i = 0; i <= deg; i++) {
             coeff[i] = sc.nextInt();
