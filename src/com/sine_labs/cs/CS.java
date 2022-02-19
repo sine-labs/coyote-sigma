@@ -17,7 +17,7 @@ public class CS {
     public static void main(String[] args) throws IOException {
         System.out.println(Colors.conv("COYOTE SIGMA", Colors.CYAN));
 
-        String[] options = new String[] {"lin", "ascii", "poly", "exit"};
+        String[] options = new String[] {"lin", "ascii", "poly", "elect", "exit"};
         while (true) {
             System.out.println("What would you like to do?");
             String option = getInput(options);
@@ -45,7 +45,7 @@ public class CS {
                 Image img = new Image(new File(file));
                 AsciiArt art = new AsciiArt(img, scale);
                 System.out.println(art);
-            } else if (option.equals("poly")) {
+            } else if (option.equals("elect")) {
                 int[] coeffs = readPoly();
                 double[] sols = new PolySolver(coeffs).sols();
                 if (sols.length == 0) {

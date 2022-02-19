@@ -15,6 +15,10 @@ separated.
 
 ### Polynomial Solver (`poly`)
 
+## Chemistry
+
+### Electron (`elect`)
+
 ## Fun
 
 ### ASCII Art Converter (`ascii`)
