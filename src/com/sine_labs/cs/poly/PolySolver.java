@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PolySolver {
+    private static final double EPSILON = 0.0001;
+
     private final int[] coeffs;
     private final ArrayList<Double> roots = new ArrayList<>();
     private final int deg;
@@ -17,29 +19,24 @@ public class PolySolver {
     // only called once in the constructor
     private void solve() {
         // base solutions for deg 1 & deg 2 solutions
-        if (deg == 1) {
-            roots.add((double) -coeffs[1] / coeffs[0]);
-            return;
-        } else if (deg == 2) {
-            long a = coeffs[0];
-            long b = coeffs[1];
-            long c = coeffs[2];
-            long discr = b * b - 4 * a * c;
-            if (discr >= 0) {
-                roots.add((-b + Math.sqrt(discr)) / (2 * a));
-                if (discr != 0) {
-                    roots.add((-b - Math.sqrt(discr)) / (2 * a));
+        ArrayList<Integer> leading = factors(coeffs[0]);
+        ArrayList<Integer> constant = factors(coeffs[deg]);
+        for (int p : constant) {
+            for (int q : leading) {
+                double poss = (double) p / q;
+                if (eval(poss) <= EPSILON && !roots.contains(poss)) {
+                    roots.add(poss);
+                }
+                if (eval(-poss) == EPSILON && !roots.contains(-poss)) {
+                    roots.add(-poss);
                 }
             }
-            return;
         }
-
-        
     }
 
     private static ArrayList<Integer> factors(int n) {
         ArrayList<Integer> factors = new ArrayList<>();
-        for (int i = 2; i * i <= n; i++) {
+        for (int i = 1; i * i <= n; i++) {
             if (n % i == 0) {
                 factors.add(i);
                 if (i * i != n) {
@@ -59,8 +56,8 @@ public class PolySolver {
         return sols;
     }
 
-    public long eval(long x) {
-        long total = 0;
+    public double eval(double x) {
+        double total = 0;
         for (int i = 0; i < coeffs.length; i++) {
             int pow = deg - i;
             total += coeffs[i] * Math.pow(x, pow);

@@ -88,6 +88,11 @@ public class CS {
     private static int[] readPoly() {
         System.out.print("Degree of polynomial: ");
         int deg = sc.nextInt();
+        while (deg < 1) {
+            System.out.print("Invalid degree. Please try again: ");
+            deg = sc.nextInt();
+        }
+
         System.out.println("Polynomial: ");
         for (int p = deg; p > 0; p--) {
             System.out.print("c_" + p + " * x^" + p + " + ");
