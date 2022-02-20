@@ -6,13 +6,13 @@ public class Term extends Expression {
     private double coef, pow;
 
     public Term(Input in) {
-        coef = toDouble(in);
+        coef = in.toDouble();
         pow = 0;
         if (!in.isEmpty() && in.getFirst() == 'x') {
             in.pop();  // remove x
             if (!in.isEmpty() && in.getFirst() == '^') {
                 in.pop();  // remove ^
-                pow = super.toDouble(in);
+                pow = in.toDouble();
             }
             else pow = 1;
         }

@@ -57,19 +57,20 @@ public class LinSolver {
     public boolean print(int r) {
         System.out.print(num[r] + ": ");
         boolean allZero = true;
-        for (int i = 0; i < m.length; i++) {
+        for (int i = 0; i < m[r].length - 1; i++) {
             if (round(m[r][i]) != 0) {
                 if (!allZero) System.out.print(" + ");
                 allZero = false;
                 System.out.print(round(m[r][i]) + var[i]);
             }
         }
-        if (allZero) {
+        if (allZero && round(m[r][m.length]) != 0) {
             System.out.println("0 = " + round(m[r][m.length]));
             System.out.println(" This system of equations cannot be solved");
             return false;
         }
-        System.out.println(" = " + round(m[r][m.length]));
+        if (allZero) System.out.println("0 = 0");
+        else System.out.println(" = " + round(m[r][m.length]));
         return true;
     }
 
