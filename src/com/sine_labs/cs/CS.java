@@ -2,6 +2,8 @@ package com.sine_labs.cs;
 
 import com.sine_labs.cs.ascii_img.AsciiArt;
 import com.sine_labs.cs.ascii_img.Image;
+import com.sine_labs.cs.calculus.Expression;
+import com.sine_labs.cs.calculus.Input;
 import com.sine_labs.cs.linalg.LinSolver;
 import com.sine_labs.cs.poly.PolySolver;
 import com.sine_labs.cs.util.Colors;
@@ -17,7 +19,9 @@ public class CS {
     public static void main(String[] args) throws IOException {
         System.out.println(Colors.conv("COYOTE SIGMA", Colors.CYAN));
 
-        String[] options = new String[] {"lin", "ascii", "poly", "elect", "exit"};
+        String[] options = new String[] {
+                "lin", "ascii", "poly", "elect", "integ", "exit"
+        };
         while (true) {
             System.out.println("What would you like to do?");
             String option = getInput(options);
@@ -56,6 +60,26 @@ public class CS {
                         System.out.println(s);
                     }
                 }
+            } else if (option.equals("integ")) {
+                System.out.print("Please input expression: ");
+                String exp = sc.next();
+                Expression expr = new Expression(new Input(exp));
+                System.out.print("Please input the bounds of integration: ");
+                double from = sc.nextDouble();
+                double to = sc.nextDouble();
+                System.out.print("Input the number of divisions you want: ");
+                int sliceNum = sc.nextInt();
+                while (sliceNum < 1) {
+                    System.out.println("Invalid division number.");
+                    sliceNum = sc.nextInt();
+                }
+
+                double total = 0;
+                double size = (to - from) / sliceNum;
+                for (double i = from; i < to; i += size) {
+                    total += expr.getVal(i) * size;
+                }
+                System.out.println("Approximate value: " + total);
             } else if (option.equals("exit")) {
                 System.out.println(Colors.conv("Goodbye.", Colors.YELLOW));
                 break;
