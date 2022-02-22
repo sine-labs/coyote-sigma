@@ -24,10 +24,10 @@ public class PolySolver {
         for (int p : constant) {
             for (int q : leading) {
                 double poss = (double) p / q;
-                if (eval(poss) <= EPSILON && !roots.contains(poss)) {
+                if (Math.abs(eval(poss)) <= EPSILON && !roots.contains(poss)) {
                     roots.add(poss);
                 }
-                if (eval(-poss) == EPSILON && !roots.contains(-poss)) {
+                if (Math.abs(eval(-poss)) <= EPSILON && !roots.contains(-poss)) {
                     roots.add(-poss);
                 }
             }
@@ -36,6 +36,7 @@ public class PolySolver {
 
     private static ArrayList<Integer> factors(int n) {
         ArrayList<Integer> factors = new ArrayList<>();
+        n = Math.abs(n);
         for (int i = 1; i * i <= n; i++) {
             if (n % i == 0) {
                 factors.add(i);
