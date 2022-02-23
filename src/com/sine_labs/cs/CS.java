@@ -49,7 +49,7 @@ public class CS {
                 Image img = new Image(new File(file));
                 AsciiArt art = new AsciiArt(img, scale);
                 System.out.println(art);
-            } else if (option.equals("elect")) {
+            } else if (option.equals("poly")) {
                 int[] coeffs = readPoly();
                 double[] sols = new PolySolver(coeffs).sols();
                 if (sols.length == 0) {
@@ -60,6 +60,8 @@ public class CS {
                         System.out.println(s);
                     }
                 }
+            } else if (option.equals("elect")) {
+                // TODO: fill this out
             } else if (option.equals("integ")) {
                 System.out.print("Please input expression: ");
                 String exp = sc.next();
