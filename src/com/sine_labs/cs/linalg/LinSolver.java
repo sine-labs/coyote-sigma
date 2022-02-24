@@ -8,8 +8,8 @@ public class LinSolver {
     private final String[] var;  // "name" of each variable
 
     public LinSolver(double[][] m, String[] var) {
-        this.m = m;
-        in = m.clone();
+        this.m = copy(m);
+        in = copy(m);
         this.var = var;
         free = new boolean[m.length];
         num = new int[m.length];
@@ -135,5 +135,13 @@ public class LinSolver {
                         "check " + sum + " vs " + in[r][m.length]);
             }
         }
+    }
+    
+    public double[][] copy(double[][] a) {
+        double[][] b = new double[a.length][a[0].length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) b[i][j] = a[i][j];
+        }
+        return b;
     }
 }
