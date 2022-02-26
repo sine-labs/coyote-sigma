@@ -16,7 +16,7 @@ public class Element {
 
     static {
         try {
-            fileReader = new Scanner(new File("Elements.csv"));
+            fileReader = new Scanner(new File("elements.csv"));
 
             elements = new Element[elementCount];
 

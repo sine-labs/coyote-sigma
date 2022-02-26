@@ -3,47 +3,8 @@ package com.sine_labs.cs.electron_orbitals;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.event.SwingPropertyChangeSupport;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-
-/**
- * 1s
- * 2s, 2p
- * 3s, 3p, 3d
- * 4s, 4p, 4d, 4f
- * 5s, 5p, 5d, 5f
- * 6s, 6p, 6d
- * 7s, 7p
- *
- * 1s 2
- *
- * 2s 4
- *
- * 2p 10
- * 3s 12
- *
- * 3p 18
- * 4s 20
- *
- * 3d 30
- * 4p 36
- * 5s 38
- *
- * 4d 48
- * 5p 54
- * 6s 56
- *
- * 4f 70
- * 5d 80
- * 6p 86
- * 7s 88
- *
- * 5f 102
- * 6d 112
- * 7p 118
- **/
 
 public class Subshell {
     private static Scanner fileReader;
@@ -65,7 +26,7 @@ public class Subshell {
     static {
         try {
             // -- Load subshellTypeNames --
-            fileReader = new Scanner(new File("Aufbaus.csv"));
+            fileReader = new Scanner(new File("aufbaus.csv"));
 
             String[] subshellTypeNames = fileReader.nextLine().split(",");
             int subshellTypeNamesLength = subshellTypeNames.length;
