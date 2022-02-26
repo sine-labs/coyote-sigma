@@ -26,8 +26,9 @@ public class Element {
                 String[] line = fileReader.nextLine().split(",");
                 name = line[0];
                 abbreviation = line[1];
+                float atomicMassUnits = Float.parseFloat(line[2]);
 
-                elements[i] = new Element(name, abbreviation, i);
+                elements[i] = new Element(name, abbreviation, atomicMassUnits, i);
             }
 
             fileReader.close();
@@ -39,12 +40,14 @@ public class Element {
     private String name; // -- Qualified name --
     private String abbreviation; // -- On the periodic table --
     private int atomicNumber; // -- How many protons in nucleus? --
+    private float atomicMassUnits; // -- Relative mass of nucleus? --
     private String[] subshells; // -- Final result --
 
     // -- Constructor --
-    public Element(String name, String abbreviation, int atomicNumber) {
+    public Element(String name, String abbreviation, float atomicMassUnits, int atomicNumber) {
         this.name = name;
         this.abbreviation = abbreviation;
+        this.atomicMassUnits = atomicMassUnits;
         this.atomicNumber = atomicNumber + 1;
         subshells = Subshell.getSubshellsString(this.atomicNumber);
         System.out.println(name + ": " + getSubshellString());
@@ -57,6 +60,10 @@ public class Element {
 
     public String getAbbreviation() {
         return abbreviation;
+    }
+
+    public float getAtomicMassUnits () {
+        return atomicMassUnits;
     }
 
     public int getAtomicNumber() {
