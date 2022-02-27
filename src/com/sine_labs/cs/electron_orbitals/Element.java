@@ -1,6 +1,7 @@
 package com.sine_labs.cs.electron_orbitals;
 
 import java.util.Scanner;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -14,7 +15,10 @@ public class Element {
     // -- Loaded names --
     private static Element[] elements;
 
-    public static void loadClass () throws IOException {
+    public static void loadClass () throws FileNotFoundException {
+        // -- Subshells needs to be loaded before this class --
+        Subshell.loadClass();
+        
         fileReader = new Scanner(new File("Elements.csv"));
 
         elements = new Element[elementCount];
