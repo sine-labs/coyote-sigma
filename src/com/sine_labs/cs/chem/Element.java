@@ -1,4 +1,4 @@
-package com.sine_labs.cs.electron_orbitals;
+package com.sine_labs.cs.chem;
 
 import java.util.Scanner;
 
@@ -15,11 +15,11 @@ public class Element {
     // -- Loaded names --
     private static Element[] elements;
 
-    public static void loadClass () throws FileNotFoundException {
+    public static void loadClass() throws FileNotFoundException {
         // -- Subshells needs to be loaded before this class --
         Subshell.loadClass();
         
-        fileReader = new Scanner(new File("Elements.csv"));
+        fileReader = new Scanner(new File("src/com/sine_labs/cs/chem/elements.csv"));
 
         elements = new Element[elementCount];
 
@@ -37,11 +37,15 @@ public class Element {
         fileReader.close();
     }
 
-    private String name; // -- Qualified name --
-    private String abbreviation; // -- On the periodic table --
-    private int atomicNumber; // -- How many protons in nucleus? --
-    private float atomicMassUnits; // -- Relative mass of nucleus? --
-    private String[] subshells; // -- Final result --
+    public static Element getElement(int atomicNumber) {
+        return elements[atomicNumber];
+    }
+
+    private final String name; // -- Qualified name --
+    private final String abbreviation; // -- On the periodic table --
+    private final int atomicNumber; // -- How many protons in nucleus? --
+    private final float atomicMassUnits; // -- Relative mass of nucleus? --
+    private final String[] subshells; // -- Final result --
 
     // -- Constructor --
     public Element(String name, String abbreviation, float atomicMassUnits, int atomicNumber) {

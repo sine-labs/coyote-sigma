@@ -4,6 +4,7 @@ import com.sine_labs.cs.ascii_img.AsciiArt;
 import com.sine_labs.cs.ascii_img.Image;
 import com.sine_labs.cs.calculus.Expression;
 import com.sine_labs.cs.calculus.Input;
+import com.sine_labs.cs.chem.Element;
 import com.sine_labs.cs.linalg.LinSolver;
 import com.sine_labs.cs.poly.PolySolver;
 import com.sine_labs.cs.util.Colors;
@@ -18,9 +19,10 @@ public class CS {
 
     public static void main(String[] args) throws IOException {
         System.out.println(Colors.conv("COYOTE SIGMA", Colors.CYAN));
+        Element.loadClass();
 
         String[] options = new String[] {
-                "lin", "ascii", "poly", "elect", "integ", "exit"
+                "lin", "ascii", "poly", "chem", "integ", "exit"
         };
         while (true) {
             System.out.println("What would you like to do?");
@@ -60,8 +62,15 @@ public class CS {
                         System.out.println(s);
                     }
                 }
-            } else if (option.equals("elect")) {
-                // TODO: fill this out
+            } else if (option.equals("chem")) {
+                System.out.print("Atomic number: ");
+                int atomNum = sc.nextInt();
+                Element e = Element.getElement(atomNum);
+                System.out.println("-- ELEMENT INFO --");
+                System.out.println(e.getName() + " - " + e.getAbbreviation());
+                System.out.println("Atomic number: " + e.getAtomicNumber());
+                System.out.println("Mass: " + e.getAtomicMassUnits());
+                System.out.println("Electron configuration: " + e.getSubshellString());
             } else if (option.equals("integ")) {
                 System.out.print("Please input expression: ");
                 String exp = sc.next();

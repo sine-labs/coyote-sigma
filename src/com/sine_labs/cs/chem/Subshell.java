@@ -1,4 +1,4 @@
-package com.sine_labs.cs.electron_orbitals;
+package com.sine_labs.cs.chem;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -25,9 +25,9 @@ public class Subshell {
     private static final int DELTA_ELECTRONS = 4;
     private static final int S_ELECTRONS = 2;
 
-    public static void loadClass () throws FileNotFoundException {
+    public static void loadClass() throws FileNotFoundException {
         // -- Load subshellTypeNames --
-        fileReader = new Scanner(new File("aufbaus.csv"));
+        fileReader = new Scanner(new File("src/com/sine_labs/cs/chem/aufbaus.csv"));
 
         String[] subshellTypeNames = fileReader.nextLine().split(",");
         int subshellTypeNamesLength = subshellTypeNames.length;
