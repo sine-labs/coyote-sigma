@@ -14,27 +14,23 @@ public class Element {
     // -- Loaded names --
     private static Element[] elements;
 
-    static {
-        try {
-            fileReader = new Scanner(new File("elements.csv"));
+    public static void loadClass () throws IOException {
+        fileReader = new Scanner(new File("Elements.csv"));
 
-            elements = new Element[elementCount];
+        elements = new Element[elementCount];
 
-            for (int i = 0; i < elementCount; ++i) {
-                String name, abbreviation;
+        for (int i = 0; i < elementCount; ++i) {
+            String name, abbreviation;
 
-                String[] line = fileReader.nextLine().split(",");
-                name = line[0];
-                abbreviation = line[1];
-                float atomicMassUnits = Float.parseFloat(line[2]);
+            String[] line = fileReader.nextLine().split(",");
+            name = line[0];
+            abbreviation = line[1];
+            float atomicMassUnits = Float.parseFloat(line[2]);
 
-                elements[i] = new Element(name, abbreviation, atomicMassUnits, i);
-            }
-
-            fileReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            elements[i] = new Element(name, abbreviation, atomicMassUnits, i);
         }
+
+        fileReader.close();
     }
 
     private String name; // -- Qualified name --
@@ -50,7 +46,6 @@ public class Element {
         this.atomicMassUnits = atomicMassUnits;
         this.atomicNumber = atomicNumber + 1;
         subshells = Subshell.getSubshellsString(this.atomicNumber);
-        System.out.println(name + ": " + getSubshellString());
     }
 
     // -- Getters --
