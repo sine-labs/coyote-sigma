@@ -136,7 +136,7 @@ public class LinSolver {
             }
         }
     }
-    
+
     public double[][] copy(double[][] a) {
         double[][] b = new double[a.length][a[0].length];
         for (int i = 0; i < a.length; i++) {
